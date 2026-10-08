@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:nft_market_app_ui/constants/string_const.dart';
 import 'package:nft_market_app_ui/core/app_colors.dart';
 import 'package:nft_market_app_ui/routing/router.dart';
-import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,24 +12,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: const [],
-      child: MaterialApp.router(
-        title: StringConst.appTitle,
-        theme: ThemeData(
-          brightness: .light,
-          fontFamily: StringConst.appFontFamily,
-          scaffoldBackgroundColor: AppColors.whiteColor,
-          colorScheme: .light(
-            primary: AppColors.primaryGreen,
-            onPrimary: AppColors.whiteColor,
-            surface: AppColors.whiteColor,
-            onSurface: AppColors.darkNormal,
-          ),
+    return MaterialApp.router(
+      title: StringConst.appTitle,
+      theme: ThemeData(
+        brightness: .light,
+        fontFamily: StringConst.appFontFamily,
+        scaffoldBackgroundColor: AppColors.whiteColor,
+        colorScheme: .light(
+          primary: AppColors.primaryGreen,
+          onPrimary: AppColors.whiteColor,
+          surface: AppColors.whiteColor,
+          onSurface: AppColors.darkNormal,
         ),
-        builder: (ctx, child) => child!,
-        routerConfig: router,
       ),
+      builder: (ctx, child) => child!,
+      routerConfig: router,
     );
   }
 }
