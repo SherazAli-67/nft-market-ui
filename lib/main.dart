@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nft_market_app_ui/constants/string_const.dart';
-import 'package:nft_market_app_ui/presentation/screens/welcome_scren.dart';
 import 'package:nft_market_app_ui/routing/router.dart';
 
 void main() {
