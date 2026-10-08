@@ -54,9 +54,19 @@ class NumberConstant {
   static const onboardingDotGap = 5.0;
   static const onboardingButtonGap = 220.0;
   static const onboardingImageHeight = 444.0;
+  static const onboardingPageCount = 4;
+  static const onboardingBottomPadding = 24.0;
+  static const onboardingTextTopGap = 40.0;
+  static const onboardingTitleSubtitleGap = 8.0;
+  static const onboardingHeroFadeHeight = 155.0;
+  static const onboardingCollageHorizontalInset = 32.0;
+  static const onboardingSkipTop = 24.0;
 
   static const underlineWidth = 95.0;
   static const underlineHeight = 12.0;
+  static const underlineBottomOffset = 52.0;
+  static const underlineRightOffset = 28.0;
+  static const underlineRotation = 0.0338;
 
   static const ethIconSize = 14.0;
   static const smallIconSize = 14.0;
