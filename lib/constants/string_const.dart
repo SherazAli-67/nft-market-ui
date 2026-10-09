@@ -9,7 +9,7 @@ class StringConst {
       'A vibrant marketplace where creators showcase their unique NFTs.';
 
   static const homeHeadlinePrefix = 'Selling the ';
-  static const homeHeadlineAccent = 'MOST POPULAR';
+  static const homeHeadlineAccent = 'MOST POPULAR\n';
   static const homeHeadlineSuffix = ' NFT is only here';
 
   static const trending = 'Trending';

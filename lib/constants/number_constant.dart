@@ -1,6 +1,6 @@
 class NumberConstant {
-  static const horizontalPadding = 32.0;
-  static const verticalPadding = 32.0;
+  static const horizontalPadding = 24.0;
+  static const verticalPadding = 24.0;
   static const screenTopPadding = 68.0;
   static const sectionGap = 32.0;
   static const contentGap = 12.0;
