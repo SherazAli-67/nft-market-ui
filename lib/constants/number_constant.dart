@@ -89,4 +89,13 @@ class NumberConstant {
   static const smallIconSize = 14.0;
   static const mediumIconSize = 20.0;
   static const largeIconSize = 24.0;
+
+  static const animFastMs = 200;
+  static const animNormalMs = 350;
+  static const animSlowMs = 500;
+  static const animStaggerMs = 80;
+  static const animSlideOffset = 0.06;
+  static const animPressScale = 0.92;
+  static const animBreatheMs = 2400;
+  static const animBreatheScale = 1.035;
 }

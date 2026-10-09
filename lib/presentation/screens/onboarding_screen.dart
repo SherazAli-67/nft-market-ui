@@ -9,6 +9,7 @@ import 'package:nft_market_app_ui/core/app_colors.dart';
 import 'package:nft_market_app_ui/core/app_textstyles.dart';
 import 'package:nft_market_app_ui/core/asset_res.dart';
 import 'package:nft_market_app_ui/presentation/providers/onboarding_provider.dart';
+import 'package:nft_market_app_ui/presentation/widgets/fade_slide_in.dart';
 import 'package:nft_market_app_ui/routing/router.dart';
 import 'package:provider/provider.dart';
 
@@ -35,7 +36,10 @@ class OnboardingScreen extends StatelessWidget {
             ),
             Column(
               children: [
-                _buildHero(context),
+                FadeSlideIn(
+                  duration: const Duration(milliseconds: NumberConstant.animSlowMs),
+                  child: _buildHero(context),
+                ),
                 Expanded(
                   child: Padding(
                     padding: .symmetric(horizontal: NumberConstant.horizontalPadding),
@@ -43,14 +47,20 @@ class OnboardingScreen extends StatelessWidget {
                       children: [
                         Padding(
                           padding: .only(top: NumberConstant.onboardingTextTopGap),
-                          child: _buildTextContent(),
+                          child: FadeSlideIn(
+                            delay: const Duration(milliseconds: NumberConstant.animStaggerMs),
+                            child: _buildTextContent(context),
+                          ),
                         ),
                         const Spacer(),
                         Padding(
                           padding: .only(bottom: NumberConstant.onboardingBottomPadding),
                           child: SafeArea(
                             top: false,
-                            child: _buildBottomActions(context),
+                            child: FadeSlideIn(
+                              delay: const Duration(milliseconds: NumberConstant.animStaggerMs * 2),
+                              child: _buildBottomActions(context),
+                            ),
                           ),
                         ),
                       ],
@@ -91,9 +101,9 @@ class OnboardingScreen extends StatelessWidget {
             right: 16,
             child: _buildGlow(163, 0.1),
           ),
-          Align(
+          const Align(
             alignment: .topLeft,
-            child:  Image.asset(AssetRes.onboardingImg, fit: .contain),
+            child: _BreathingHeroImage(),
           ),
           Positioned(
             left: 0,
@@ -138,28 +148,34 @@ class OnboardingScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTextContent() {
-    return Column(
-      spacing: NumberConstant.onboardingTitleSubtitleGap,
-      children: [
-        _buildTitle(),
-        Text(
-          StringConst.onboardingSubtitle,
-          style: AppTextStyles.bodyLight,
-          textAlign: .center,
+  Widget _buildTextContent(BuildContext context) {
+    final pageIndex = context.watch<OnboardingProvider>().pageIndex;
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: NumberConstant.animNormalMs),
+      switchInCurve: Curves.easeOutCubic,
+      switchOutCurve: Curves.easeInCubic,
+      transitionBuilder: (child, animation) => FadeTransition(
+        opacity: animation,
+        child: SlideTransition(
+          position: Tween(begin: const Offset(0, NumberConstant.animSlideOffset), end: Offset.zero).animate(animation),
+          child: child,
         ),
-      ],
+      ),
+      child: Column(
+        key: ValueKey(pageIndex),
+        spacing: NumberConstant.onboardingTitleSubtitleGap,
+        children: [
+          _buildTitle(),
+          Text(StringConst.onboardingSubtitle, style: AppTextStyles.bodyLight, textAlign: .center),
+        ],
+      ),
     );
   }
 
   Widget _buildTitle() {
     return Column(
       children: [
-        Text(
-          StringConst.onboardingTitlePrefix.trimRight(),
-          style: AppTextStyles.onboardingTitle,
-          textAlign: .center,
-        ),
+        Text(StringConst.onboardingTitlePrefix.trimRight(), style: AppTextStyles.onboardingTitle, textAlign: .center),
         Stack(
           clipBehavior: .none,
           alignment: .center,
@@ -197,29 +213,38 @@ class OnboardingScreen extends StatelessWidget {
       children: List.generate(NumberConstant.onboardingPageCount, (index) {
         final isActive = index == pageIndex;
         final size = isActive ? NumberConstant.onboardingActiveDotSize : NumberConstant.onboardingDotSize;
-        return DecoratedBox(
+        return AnimatedContainer(
+          duration: const Duration(milliseconds: NumberConstant.animFastMs),
+          curve: Curves.easeOutCubic,
+          width: size,
+          height: size,
           decoration: BoxDecoration(
             color: AppColors.darkNormal.withValues(alpha: isActive ? 1 : 0.3),
             borderRadius: .circular(NumberConstant.buttonRadius),
           ),
-          child: SizedBox(width: size, height: size),
         );
       }),
     );
   }
 
   Widget _buildNextButton(BuildContext context) {
+    final isPressed = context.watch<OnboardingProvider>().isNextPressed;
     return GestureDetector(
+      onTapDown: (_) => context.read<OnboardingProvider>().setNextPressed(true),
+      onTapUp: (_) => context.read<OnboardingProvider>().setNextPressed(false),
+      onTapCancel: () => context.read<OnboardingProvider>().setNextPressed(false),
       onTap: () => _onNext(context),
       behavior: .opaque,
-      child: DecoratedBox(
-        decoration: const BoxDecoration(
-          color: AppColors.darkNormal,
-          shape: .circle,
-        ),
-        child: Padding(
-          padding: .all(NumberConstant.circularActionPadding),
-          child: SvgPicture.asset(AssetRes.icArrowNext),
+      child: AnimatedScale(
+        scale: isPressed ? NumberConstant.animPressScale : 1,
+        duration: const Duration(milliseconds: NumberConstant.animFastMs),
+        curve: Curves.easeOutCubic,
+        child: DecoratedBox(
+          decoration: const BoxDecoration(color: AppColors.darkNormal, shape: .circle),
+          child: Padding(
+            padding: .all(NumberConstant.circularActionPadding),
+            child: SvgPicture.asset(AssetRes.icArrowNext),
+          ),
         ),
       ),
     );
@@ -232,5 +257,44 @@ class OnboardingScreen extends StatelessWidget {
       return;
     }
     provider.nextPage(pageCount: NumberConstant.onboardingPageCount);
+  }
+}
+
+class _BreathingHeroImage extends StatefulWidget {
+  const _BreathingHeroImage();
+
+  @override
+  State<_BreathingHeroImage> createState() => _BreathingHeroImageState();
+}
+
+class _BreathingHeroImageState extends State<_BreathingHeroImage> with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  late final Animation<double> _scale;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: NumberConstant.animBreatheMs),
+    )..repeat(reverse: true);
+    _scale = Tween(begin: 1.0, end: NumberConstant.animBreatheScale).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ScaleTransition(
+      scale: _scale,
+      alignment: .topLeft,
+      child: Image.asset(AssetRes.onboardingImg, fit: .contain),
+    );
   }
 }
