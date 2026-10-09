@@ -9,14 +9,16 @@ import 'package:nft_market_app_ui/core/asset_res.dart';
 import 'package:nft_market_app_ui/core/models/nft_model.dart';
 import 'package:nft_market_app_ui/presentation/widgets/app_back_button.dart';
 import 'package:nft_market_app_ui/presentation/widgets/dashed_divider.dart';
+import 'package:nft_market_app_ui/presentation/widgets/fade_slide_in.dart';
 import 'package:nft_market_app_ui/presentation/widgets/primary_button.dart';
 
 class DetailScreen extends StatelessWidget {
-  const DetailScreen({super.key});
+  final NftModel nft;
+
+  const DetailScreen({super.key, this.nft = AppData.featuredNft});
 
   @override
   Widget build(BuildContext context) {
-    final nft = AppData.featuredNft;
     return Scaffold(
       backgroundColor: AppColors.whiteColor,
       body: SafeArea(
@@ -28,7 +30,7 @@ class DetailScreen extends StatelessWidget {
                 child: Column(
                   spacing: NumberConstant.homeSectionGap,
                   children: [
-                    _buildNavigation(),
+                    FadeSlideIn(child: _buildNavigation()),
                     Expanded(
                       child: ListView(
                         padding: .only(bottom: NumberConstant.sectionGap),
@@ -36,7 +38,10 @@ class DetailScreen extends StatelessWidget {
                           _buildImage(nft),
                           Padding(
                             padding: .only(top: NumberConstant.homeSectionGap),
-                            child: _buildProductInfo(nft),
+                            child: FadeSlideIn(
+                              delay: const Duration(milliseconds: NumberConstant.animStaggerMs),
+                              child: _buildProductInfo(nft),
+                            ),
                           ),
                         ],
                       ),
@@ -45,7 +50,11 @@ class DetailScreen extends StatelessWidget {
                 ),
               ),
             ),
-            _buildBottomBar(nft),
+            FadeSlideIn(
+              delay: const Duration(milliseconds: NumberConstant.animStaggerMs * 2),
+              offset: const Offset(0, NumberConstant.animSlideOffset * 2),
+              child: _buildBottomBar(nft),
+            ),
           ],
         ),
       ),
@@ -65,13 +74,16 @@ class DetailScreen extends StatelessWidget {
   }
 
   Widget _buildImage(NftModel nft) {
-    return ClipRRect(
-      borderRadius: .circular(NumberConstant.imageRadius),
-      child: Image.asset(
-        nft.image,
-        height: NumberConstant.detailImageHeight,
-        width: double.infinity,
-        fit: .cover,
+    return Hero(
+      tag: nft.id,
+      child: ClipRRect(
+        borderRadius: .circular(NumberConstant.imageRadius),
+        child: Image.asset(
+          nft.image,
+          height: NumberConstant.detailImageHeight,
+          width: double.infinity,
+          fit: .cover,
+        ),
       ),
     );
   }
@@ -96,10 +108,7 @@ class DetailScreen extends StatelessWidget {
                         crossAxisAlignment: .start,
                         children: [
                           Text(nft.id, style: AppTextStyles.nftId),
-                          Text(
-                            nft.name,
-                            style: AppTextStyles.detailTitle.copyWith(fontWeight: .w500),
-                          ),
+                          Text(nft.name, style: AppTextStyles.detailTitle.copyWith(fontWeight: .w500)),
                         ],
                       ),
                       Row(
@@ -150,10 +159,7 @@ class DetailScreen extends StatelessWidget {
 
   Widget _buildCrownBadge() {
     return DecoratedBox(
-      decoration: const BoxDecoration(
-        color: AppColors.greyLight,
-        shape: .circle,
-      ),
+      decoration: const BoxDecoration(color: AppColors.greyLight, shape: .circle),
       child: Padding(
         padding: .all(NumberConstant.crownBadgePadding),
         child: SvgPicture.asset(AssetRes.icCrown, colorFilter: .mode(AppColors.darkNormal, .srcIn)),

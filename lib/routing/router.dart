@@ -1,4 +1,6 @@
 import 'package:go_router/go_router.dart';
+import 'package:nft_market_app_ui/core/app_data.dart';
+import 'package:nft_market_app_ui/core/models/nft_model.dart';
 import 'package:nft_market_app_ui/presentation/screens/bookmark_screen.dart';
 import 'package:nft_market_app_ui/presentation/screens/collection_screen.dart';
 import 'package:nft_market_app_ui/presentation/screens/detail_screen.dart';
@@ -54,7 +56,10 @@ GoRouter router = GoRouter(
     ),
     GoRoute(
       path: NamedRoutes.detail.routeName,
-      builder: (ctx, state) => const DetailScreen(),
+      builder: (ctx, state) {
+        final nft = state.extra is NftModel ? state.extra as NftModel : AppData.featuredNft;
+        return DetailScreen(nft: nft);
+      },
     ),
     GoRoute(
       path: NamedRoutes.collection.routeName,

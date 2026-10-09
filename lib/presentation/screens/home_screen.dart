@@ -141,7 +141,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildCollectionCard(BuildContext context, NftModel nft) {
     return GestureDetector(
-      onTap: () => context.push(NamedRoutes.detail.routeName),
+      onTap: () => context.push(NamedRoutes.detail.routeName, extra: nft),
       behavior: .opaque,
       child: Column(
         children: [
@@ -221,7 +221,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       //PrimaryButton: label-placeBid, icon:icBid, onTap, detail.routeName
-                      PrimaryButton(label: StringConst.placeBid, icon: AssetRes.icBid, onTap: ()=> context.push(NamedRoutes.detail.routeName),)
+                      PrimaryButton(label: StringConst.placeBid, icon: AssetRes.icBid, onTap: () => context.push(NamedRoutes.detail.routeName, extra: nft)),
                     ],
                   ),
                 ],

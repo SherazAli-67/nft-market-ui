@@ -267,7 +267,7 @@ class CollectionScreen extends StatelessWidget {
 
   Widget _buildGridItem(BuildContext context, NftModel nft) {
     return GestureDetector(
-      onTap: () => context.push(NamedRoutes.detail.routeName),
+      onTap: () => context.push(NamedRoutes.detail.routeName, extra: nft),
       behavior: .opaque,
       child: ClipRRect(
         borderRadius: .circular(NumberConstant.gridItemRadius),
