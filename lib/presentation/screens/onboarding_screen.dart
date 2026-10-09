@@ -92,15 +92,8 @@ class OnboardingScreen extends StatelessWidget {
             child: _buildGlow(163, 0.1),
           ),
           Align(
-            alignment: .bottomCenter,
-            child: Padding(
-              padding: .only(
-                left: NumberConstant.onboardingCollageHorizontalInset,
-                right: NumberConstant.onboardingCollageHorizontalInset,
-                bottom: NumberConstant.sectionGap,
-              ),
-              child: Image.asset(AssetRes.onboardingImg, fit: .contain),
-            ),
+            alignment: .topLeft,
+            child:  Image.asset(AssetRes.onboardingImg, fit: .contain),
           ),
           Positioned(
             left: 0,
