@@ -1,7 +1,8 @@
 class NumberConstant {
   static const horizontalPadding = 32.0;
+  static const verticalPadding = 32.0;
   static const screenTopPadding = 68.0;
-  static const sectionGap = 16.0;
+  static const sectionGap = 32.0;
   static const contentGap = 12.0;
   static const smallGap = 8.0;
   static const microGap = 4.0;
@@ -45,6 +46,13 @@ class NumberConstant {
   static const bannerHeight = 117.0;
   static const detailImageHeight = 329.0;
   static const collectionCardImageHeight = 187.0;
+  static const collectionCardPadding = 16.0;
+  static const collectionCardShadowBlur = 40.0;
+  static const homeSectionGap = 24.0;
+  static const homeListBottomPadding = 24.0;
+  static const artistRowGap = 32.0;
+  static const artistInfoGap = 12.0;
+  static const bidRowGap = 48.0;
   static const gridItemHeight = 178.0;
   static const gridCrossAxisSpacing = 15.0;
   static const gridMainAxisSpacing = 16.0;

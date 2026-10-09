@@ -14,7 +14,7 @@ class AppData {
   static const topCollection = NftModel(
     id: StringConst.nftId18417,
     name: StringConst.nftNameApesG,
-    image: AssetRes.itemsImg2,
+    image: AssetRes.topCollectionImg,
     priceEth: StringConst.nftPrice223,
     endsIn: StringConst.nftEndsIn,
     sold: 125,

@@ -8,6 +8,7 @@ class AssetRes {
   static const detailImg = '${_imagesPath}detail_img.png';
   static const itemImg2 = '${_imagesPath}item_img2.png';
   static const itemsImg2 = '${_imagesPath}items_img2.png';
+  static const topCollectionImg = '${_imagesPath}top_collection_img.png';
 
   static const icHome = '${_iconsPath}ic_home.svg';
   static const icSearch = '${_iconsPath}ic_search.svg';
