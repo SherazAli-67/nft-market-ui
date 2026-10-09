@@ -9,7 +9,7 @@ import 'package:nft_market_app_ui/presentation/screens/profile_screen.dart';
 import 'package:nft_market_app_ui/presentation/screens/search_screen.dart';
 
 GoRouter router = GoRouter(
-  initialLocation: NamedRoutes.onboarding.routeName,
+  initialLocation: NamedRoutes.home.routeName,
   routes: [
     GoRoute(
       path: NamedRoutes.onboarding.routeName,

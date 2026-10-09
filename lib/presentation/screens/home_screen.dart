@@ -56,9 +56,9 @@ class HomeScreen extends StatelessWidget {
     return Text.rich(
       TextSpan(
         children: [
-          TextSpan(text: StringConst.homeHeadlinePrefix, style: AppTextStyles.homeHeadline),
-          TextSpan(text: StringConst.homeHeadlineAccent, style: AppTextStyles.accentGreen),
-          TextSpan(text: StringConst.homeHeadlineSuffix, style: AppTextStyles.homeHeadline),
+          //homeHeadlinePrefix, homeHeadline
+          //homeHeadlineAccent, accentGreen
+          //homeHeadlineSuffix, homeHeadline
         ],
       ),
     );
@@ -72,26 +72,24 @@ class HomeScreen extends StatelessWidget {
         spacing: NumberConstant.chipGap,
         children: List.generate(AppData.categories.length, (index) {
           final isActive = index == selectedIndex;
+          String category = AppData.categories[index];
           return GestureDetector(
             onTap: () => context.read<HomeProvider>().selectCategory(index),
             behavior: .opaque,
             child: DecoratedBox(
               decoration: BoxDecoration(
-                color: isActive ? AppColors.primaryGreen : AppColors.greyLight,
+               /* color: isActive ? AppColors.primaryGreen : AppColors.greyLight,
                 borderRadius: .circular(NumberConstant.chipRadius),
-                border: .all(color: AppColors.greyNormal),
+                border: .all(color: AppColors.greyNormal),*/
               ),
               child: Padding(
                 padding: .symmetric(
-                  horizontal: isActive
-                      ? NumberConstant.chipHorizontalPadding
-                      : NumberConstant.chipHorizontalPaddingInactive,
+                  horizontal:  NumberConstant.chipHorizontalPadding,
                   vertical: NumberConstant.chipVerticalPadding,
                 ),
-                child: Text(
-                  AppData.categories[index],
-                  style: isActive ? AppTextStyles.chipActive : AppTextStyles.chipInactive,
-                ),
+
+                //category, isActive, chipActive, chipInactive
+                child: const SizedBox(),
               ),
             ),
           );
@@ -103,8 +101,8 @@ class HomeScreen extends StatelessWidget {
   Widget _buildSectionHeader(String title) {
     return Row(
       children: [
-        Expanded(child: Text(title, style: AppTextStyles.sectionTitle)),
-        SvgPicture.asset(AssetRes.icMore),
+        //title, sectionTitle,
+        //icMore
       ],
     );
   }
@@ -128,25 +126,20 @@ class HomeScreen extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: .vertical(top: .circular(NumberConstant.cardRadius)),
-            child: Image.asset(
-              nft.image,
-              height: NumberConstant.collectionCardImageHeight,
-              width: double.infinity,
-              fit: .cover,
-            ),
+            //nft.image, height: collectionCardImgHeight, fit.cover
           ),
           DecoratedBox(
             decoration: BoxDecoration(
               color: AppColors.whiteColor,
               borderRadius: .vertical(bottom: .circular(NumberConstant.cardRadius)),
-              boxShadow: [
+              /*boxShadow: [
                 BoxShadow(
                   color: AppColors.darkLighter.withValues(alpha: 0.1),
                   blurRadius: NumberConstant.collectionCardShadowBlur,
                   spreadRadius: 0,
                   offset: const Offset(0, 5),
                 ),
-              ],
+              ],*/
             ),
             child: Padding(
               padding: .all(NumberConstant.collectionCardPadding),
@@ -158,24 +151,25 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Expanded(child: Text(nft.name, style: AppTextStyles.bodyMedium)),
+                          //nft.name, bodyMedium
+                          Expanded(child: const SizedBox()),
                           Column(
                             spacing: NumberConstant.microGap,
                             crossAxisAlignment: .end,
                             children: [
-                              Text(StringConst.endsIn, style: AppTextStyles.caption),
+                              //endsIn, caption
                               Row(
                                 spacing: NumberConstant.smallGap,
                                 children: [
-                                  SvgPicture.asset(AssetRes.icClock),
-                                  Text(nft.endsIn, style: AppTextStyles.labelMedium),
+                                  //icClock
+                                  //nft.endsIn
                                 ],
                               ),
                             ],
                           ),
                         ],
                       ),
-                      const DashedDivider(),
+                      // const DashedDivider(),
                     ],
                   ),
                   Row(
@@ -185,22 +179,19 @@ class HomeScreen extends StatelessWidget {
                           spacing: NumberConstant.microGap,
                           crossAxisAlignment: .start,
                           children: [
-                            Text(StringConst.highestBidToday, style: AppTextStyles.caption),
+                            //highestBiddingToday, caption
                             Row(
                               spacing: NumberConstant.microGap,
                               children: [
-                                SvgPicture.asset(AssetRes.icEth),
-                                Text(nft.priceEth, style: AppTextStyles.labelMedium),
+                                //icEth
+                                //nft.priceEth, labelMedium
                               ],
                             ),
                           ],
                         ),
                       ),
-                      PrimaryButton(
-                        label: StringConst.placeBid,
-                        icon: AssetRes.icBid,
-                        onTap: () => context.push(NamedRoutes.detail.routeName),
-                      ),
+                      //PrimaryButton: label-placeBid, icon:icBid, onTap, detail.routeName
+
                     ],
                   ),
                 ],
@@ -217,7 +208,7 @@ class HomeScreen extends StatelessWidget {
     return Column(
       spacing: NumberConstant.sectionGap,
       children: [
-        _buildSectionHeader(StringConst.bestArtist),
+        // _buildSectionHeader(StringConst.bestArtist),
         _buildArtistRow(context, artist),
       ],
     );
@@ -235,20 +226,16 @@ class HomeScreen extends StatelessWidget {
               spacing: NumberConstant.artistInfoGap,
               children: [
                 ClipOval(
-                  child: Image.asset(
-                    artist.avatar,
-                    width: NumberConstant.avatarSize,
-                    height: NumberConstant.avatarSize,
-                    fit: .cover,
-                  ),
+                  //artist.avatar, widthHeight: avatarSize, fit.cover
+                  child: const SizedBox()
                 ),
                 Expanded(
                   child: Column(
                     spacing: NumberConstant.microGap,
                     crossAxisAlignment: .start,
                     children: [
-                      Text(artist.name, style: AppTextStyles.labelMedium, maxLines: 1, overflow: .ellipsis),
-                      Text(artist.followers, style: AppTextStyles.caption),
+                      //artist.name, labelMedium,
+                      //artist.followers, caption
                     ],
                   ),
                 ),
@@ -256,7 +243,7 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
         ),
-        PrimaryButton(
+       /* PrimaryButton(
           label: StringConst.follow,
           variant: .green,
           padding: .symmetric(
@@ -264,7 +251,7 @@ class HomeScreen extends StatelessWidget {
             vertical: NumberConstant.buttonVerticalPadding,
           ),
           onTap: () => context.push(NamedRoutes.collection.routeName),
-        ),
+        ),*/
       ],
     );
   }

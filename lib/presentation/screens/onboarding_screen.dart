@@ -27,12 +27,14 @@ class OnboardingScreen extends StatelessWidget {
             Positioned(
               left: NumberConstant.horizontalPadding * 0.6,
               bottom: 120,
-              child: _buildGlow(95, 0.15),
+              child: const SizedBox(),
+              // child: _buildGlow(95, 0.15),
             ),
             Positioned(
               right: NumberConstant.horizontalPadding * 1.5,
               bottom: 80,
-              child: _buildGlow(95, 0.15),
+              child: const SizedBox(),
+              // child: _buildGlow(95, 0.15),
             ),
             Column(
               children: [
@@ -59,7 +61,8 @@ class OnboardingScreen extends StatelessWidget {
                             top: false,
                             child: FadeSlideIn(
                               delay: const Duration(milliseconds: NumberConstant.animStaggerMs * 2),
-                              child: _buildBottomActions(context),
+                              // child: _buildBottomActions(context),
+                              child: const SizedBox(),
                             ),
                           ),
                         ),
@@ -95,15 +98,17 @@ class OnboardingScreen extends StatelessWidget {
       width: double.infinity,
       child: Stack(
         children: [
-          const ColoredBox(color: AppColors.greenLight, child: SizedBox.expand()),
+          //ColoredBox-greenLight, child: SizedBox.expand
+
           Positioned(
             top: 28,
             right: 16,
-            child: _buildGlow(163, 0.1),
+            child: const SizedBox(),
+            // child: _buildGlow(163, 0.1),
           ),
           const Align(
             alignment: .topLeft,
-            child: _BreathingHeroImage(),
+            //breathingHeroImg
           ),
           Positioned(
             left: 0,
@@ -112,7 +117,7 @@ class OnboardingScreen extends StatelessWidget {
             height: NumberConstant.onboardingHeroFadeHeight,
             child: DecoratedBox(
               decoration: BoxDecoration(
-                gradient: LinearGradient(
+               /* gradient: LinearGradient(
                   begin: .topCenter,
                   end: .bottomCenter,
                   colors: [
@@ -120,7 +125,7 @@ class OnboardingScreen extends StatelessWidget {
                     AppColors.whiteColor,
                   ],
                   stops: const [0.35, 1],
-                ),
+                ),*/
               ),
             ),
           ),
@@ -138,7 +143,7 @@ class OnboardingScreen extends StatelessWidget {
                     NumberConstant.horizontalPadding,
                     NumberConstant.smallGap,
                   ),
-                  child: Text(StringConst.skip, style: AppTextStyles.labelMedium),
+                  //skip, labelMedium
                 ),
               ),
             ),
@@ -165,36 +170,29 @@ class OnboardingScreen extends StatelessWidget {
         key: ValueKey(pageIndex),
         spacing: NumberConstant.onboardingTitleSubtitleGap,
         children: [
-          _buildTitle(),
-          Text(StringConst.onboardingSubtitle, style: AppTextStyles.bodyLight, textAlign: .center),
+          //onboardingTitlePrefix.trimRight, onboardingTitle, .center
+          Stack(
+            clipBehavior: .none,
+            alignment: .center,
+            children: [
+              //onboardingTitleAccent, accentGreenLarge, .center
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: -NumberConstant.microGap,
+                child: Transform.rotate(
+                  angle: NumberConstant.underlineRotation,
+                  //icNftUnderline
+                ),
+              ),
+            ],
+          ),
+          //onboardingSubtitle, bodyLight, .center
         ],
       ),
     );
   }
 
-  Widget _buildTitle() {
-    return Column(
-      children: [
-        Text(StringConst.onboardingTitlePrefix.trimRight(), style: AppTextStyles.onboardingTitle, textAlign: .center),
-        Stack(
-          clipBehavior: .none,
-          alignment: .center,
-          children: [
-            Text(StringConst.onboardingTitleAccent, style: AppTextStyles.accentGreenLarge, textAlign: .center),
-            Positioned(
-              left: 0,
-              right: 0,
-              bottom: -NumberConstant.microGap,
-              child: Transform.rotate(
-                angle: NumberConstant.underlineRotation,
-                child: SvgPicture.asset(AssetRes.icNftUnderline),
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
 
   Widget _buildBottomActions(BuildContext context) {
     final pageIndex = context.watch<OnboardingProvider>().pageIndex;
