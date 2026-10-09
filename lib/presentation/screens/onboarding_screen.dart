@@ -27,14 +27,12 @@ class OnboardingScreen extends StatelessWidget {
             Positioned(
               left: NumberConstant.horizontalPadding * 0.6,
               bottom: 120,
-              child: const SizedBox(),
-              // child: _buildGlow(95, 0.15),
+              child: _buildGlow(95, 0.15),
             ),
             Positioned(
               right: NumberConstant.horizontalPadding * 1.5,
               bottom: 80,
-              child: const SizedBox(),
-              // child: _buildGlow(95, 0.15),
+              child: _buildGlow(95, 0.15),
             ),
             Column(
               children: [
@@ -62,7 +60,7 @@ class OnboardingScreen extends StatelessWidget {
                             child: FadeSlideIn(
                               delay: const Duration(milliseconds: NumberConstant.animStaggerMs * 2),
                               // child: _buildBottomActions(context),
-                              child: const SizedBox(),
+                              child: _buildBottomActions(context)
                             ),
                           ),
                         ),
@@ -99,16 +97,15 @@ class OnboardingScreen extends StatelessWidget {
       child: Stack(
         children: [
           //ColoredBox-greenLight, child: SizedBox.expand
-
+          ColoredBox(color: AppColors.greenLight, child: SizedBox.expand(),),
           Positioned(
             top: 28,
             right: 16,
-            child: const SizedBox(),
-            // child: _buildGlow(163, 0.1),
+            child: _buildGlow(163, 0.1),
           ),
           const Align(
             alignment: .topLeft,
-            //breathingHeroImg
+            child: _BreathingHeroImage(),
           ),
           Positioned(
             left: 0,
@@ -117,7 +114,7 @@ class OnboardingScreen extends StatelessWidget {
             height: NumberConstant.onboardingHeroFadeHeight,
             child: DecoratedBox(
               decoration: BoxDecoration(
-               /* gradient: LinearGradient(
+                gradient: LinearGradient(
                   begin: .topCenter,
                   end: .bottomCenter,
                   colors: [
@@ -125,7 +122,7 @@ class OnboardingScreen extends StatelessWidget {
                     AppColors.whiteColor,
                   ],
                   stops: const [0.35, 1],
-                ),*/
+                ),
               ),
             ),
           ),
@@ -144,6 +141,7 @@ class OnboardingScreen extends StatelessWidget {
                     NumberConstant.smallGap,
                   ),
                   //skip, labelMedium
+                  child: Text(StringConst.skip, style: AppTextStyles.labelMedium,),
                 ),
               ),
             ),
@@ -171,11 +169,13 @@ class OnboardingScreen extends StatelessWidget {
         spacing: NumberConstant.onboardingTitleSubtitleGap,
         children: [
           //onboardingTitlePrefix.trimRight, onboardingTitle, .center
+          Text(StringConst.onboardingTitlePrefix.trimRight(), style: AppTextStyles.onboardingTitle, textAlign: .center),
           Stack(
             clipBehavior: .none,
             alignment: .center,
             children: [
               //onboardingTitleAccent, accentGreenLarge, .center
+              Text(StringConst.onboardingTitleAccent, style: AppTextStyles.accentGreen, textAlign: .center,),
               Positioned(
                 left: 0,
                 right: 0,
@@ -183,11 +183,13 @@ class OnboardingScreen extends StatelessWidget {
                 child: Transform.rotate(
                   angle: NumberConstant.underlineRotation,
                   //icNftUnderline
+                  child: SvgPicture.asset(AssetRes.icNftUnderline),
                 ),
               ),
             ],
           ),
           //onboardingSubtitle, bodyLight, .center
+          Text(StringConst.onboardingSubtitle, style: AppTextStyles.bodyLight, textAlign: .center,),
         ],
       ),
     );
