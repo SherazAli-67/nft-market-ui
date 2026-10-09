@@ -56,6 +56,15 @@ class NumberConstant {
   static const gridItemHeight = 178.0;
   static const gridCrossAxisSpacing = 15.0;
   static const gridMainAxisSpacing = 16.0;
+  static const gridItemOverlayPadding = 16.0;
+  static const gridItemOverlayTopPadding = 4.0;
+  static const statsSeparatorHeight = 33.0;
+  static const statsGap = 24.0;
+  static const profileSectionGap = 24.0;
+  static const profileDetailGap = 16.0;
+  static const bannerAvatarOverlap = 47.5;
+  static const tabUnderlineHeight = 2.0;
+  static const watchlistMoreGap = 16.0;
 
   static const onboardingDotSize = 4.0;
   static const onboardingActiveDotSize = 8.0;

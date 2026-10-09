@@ -53,7 +53,7 @@ class AppData {
     NftModel(
       id: StringConst.nftId18417,
       name: StringConst.nftNameApesG,
-      image: AssetRes.itemsImg2,
+      image: AssetRes.topCollectionImg,
       priceEth: StringConst.nftPrice223,
       endsIn: StringConst.nftEndsIn,
       sold: 210,
@@ -62,7 +62,7 @@ class AppData {
     NftModel(
       id: StringConst.nftId12414,
       name: StringConst.nftNameApesP,
-      image: AssetRes.onboardingImg,
+      image: AssetRes.collectionItem4Img,
       priceEth: StringConst.nftPrice223,
       endsIn: StringConst.nftEndsIn,
       sold: 64,
